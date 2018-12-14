@@ -7,6 +7,7 @@
 
 ## 安装
 php artisan key:generate	更新密钥数据
+
 php artisan migrate --seed		去填充数据
 ## License
 
