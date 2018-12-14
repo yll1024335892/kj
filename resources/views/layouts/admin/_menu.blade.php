@@ -10,9 +10,9 @@
 ?>
 <aside class="Hui-admin-aside-wrapper">
     <div class="Hui-admin-logo-wrapper">
-        <a class="logo navbar-logo" href="/aboutHui.shtml">
+        <a class="logo navbar-logo" href="javascript:">
             <i class="va-m iconpic global-logo"></i>
-            <span class="va-m">H-ui.admin</span>
+            <span class="va-m">阿翼互联管理后台</span>
         </a>
     </div>
     <div class="Hui-admin-menu-dropdown bk_2">

@@ -30,6 +30,7 @@ Route::get('/member/reduction', 'Admin\Member\MemberController@reduction')->name
 Route::get('/member/changepsw', 'Admin\Member\MemberController@changepsw')->name('member.changepsw');
 Route::get('/member/share', 'Admin\Member\SharelinkController@index')->name('member.share');
 Route::get('/ayiadmin/login', 'Admin\LoginController@login')->name('ayiadmin.login');
+Route::get('/ayiadmin/regist', 'Admin\LoginController@regist')->name('ayiadmin.regist');
 //统计相关
 Route::get('/statistics/linechart','Admin\Statistics\StatisticsController@linechart')->name('statistics.linechart');
 Route::get('/statistics/areamap','Admin\Statistics\StatisticsController@areamap')->name('statistics.areamap');
@@ -40,4 +41,6 @@ Route::get('/statistics/scatterplot','Admin\Statistics\StatisticsController@scat
 Route::get('/comment/list','Admin\Comment\CommentController@list')->name('comment.list');
 Route::get('/opinion/list','Admin\Comment\OpinionController@list')->name('opinion.list');
 
+//前台相关
+Route::get('/ayi/user','User\UserController@index')->name("ayi.user.index");
 
