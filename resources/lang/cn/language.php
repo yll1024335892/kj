@@ -13,6 +13,9 @@ return [
     "Password"=>"密码",
     "ConfirmPassword"=>"确认密码",
     "Register"=>"注册",
+    "code"=>'验证码',
+    'codeMsg'=>'点击图片重新获取验证码',
+    'forget-password'=>"忘记密码",
     //登录相关
     'password' => '密码必须至少为六个字符并与确认匹配.',
     'reset' => '您的密码已重置!',
