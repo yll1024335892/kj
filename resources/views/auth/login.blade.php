@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.appxx')
 
 @section('content')
 <div class="container">
@@ -64,6 +64,7 @@
                                 @endif
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
