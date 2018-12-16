@@ -42,5 +42,6 @@ Route::get('/comment/list','Admin\Comment\CommentController@list')->name('commen
 Route::get('/opinion/list','Admin\Comment\OpinionController@list')->name('opinion.list');
 
 //前台相关
+//
 Route::get('/ayi/user','User\UserController@index')->name("ayi.user.index");
 

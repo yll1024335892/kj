@@ -40,10 +40,10 @@ class PermissionController extends Controller
                 $r->givePermissionTo($permission);
             }
         }
-
-        return redirect()->route('admin.permission.index')
-            ->with('flash_message',
-                'Permission'. $permission->name.' added!');
+//
+//        return redirect()->route('admin.permission.index')
+//            ->with('flash_message',
+//                'Permission'. $permission->name.' added!');
     }
 
     public function update(Request $request ,$id){

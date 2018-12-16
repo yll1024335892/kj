@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * 会员中心登陆的首页
      */

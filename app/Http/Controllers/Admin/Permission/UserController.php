@@ -12,9 +12,7 @@ class UserController extends Controller
     public function  index(){
         $menuMark="user_index";//是否是当前menu选择
         $menuSelect="permission";
-        $users = User::all();
-        echo Hash::make("abc123");
-
+        $users = User::where('isadmin','=','1')->get();
         return view("admin.permission.user_show",compact("menuMark","menuSelect","users"));
     }
 
