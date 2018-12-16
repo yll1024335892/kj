@@ -32,7 +32,7 @@
                 <div class="clearfix">
 							<span class="f-l">
 								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-								<a class="btn btn-primary radius" onclick="system_category_add('添加栏目','system-category-add.html','800','500')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加栏目</a>
+								<a class="btn btn-primary radius" onclick="system_category_add('添加栏目','{{route('category.create')}}','','500')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加栏目</a>
 							</span>
                     <span class="f-r">共有数据：<strong>54</strong> 条</span>
                 </div>
@@ -48,32 +48,29 @@
                             <th width="100">操作</th>
                         </tr>
                         </thead>
+                        @if(count($categoryList))
                         <tbody>
+                        @foreach($categoryList as $category)
                         <tr class="text-c">
-                            <td><input type="checkbox" name="" value=""></td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td class="text-l">一级栏目</td>
+                            <td><input type="checkbox" name="id[]" value="{{$category['id']}}"></td>
+                            <td>{{$category['id']}}</td>
+                            <td>{{$category['sort']}}</td>
+                            <td class="text-l">{{$category['name']}}</td>
                             <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="article_category_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                         </tr>
-                        <tr class="text-c">
-                            <td><input type="checkbox" name="" value=""></td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td class="text-l">&nbsp;&nbsp;├&nbsp;二级栏目</td>
-                            <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','2','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="article_category_del(this,'2')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                        </tr>
-                        <tr class="text-c">
-                            <td><input type="checkbox" name="" value=""></td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td class="text-l">&nbsp;&nbsp;├&nbsp;二级栏目</td>
-                            <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','3','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="system-category_del(this,'3')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                        </tr>
+                        @endforeach
                         </tbody>
+                        @endif
                     </table>
                 </div>
             </div>
         </div>
     </article>
+@endsection
+@section("script")
+    <script type="text/javascript">
+        function system_category_add(title,url,w,h){
+            layer_show(title,url,w,h);
+        }
+    </script>
 @endsection

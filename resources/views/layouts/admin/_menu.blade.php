@@ -56,11 +56,7 @@
                         class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="product-brand.html" title="品牌管理">品牌管理</a></li>
-                    <li><a href="product-category.html" title="分类管理">分类管理</a></li>
-                    <li><a href="product-list.html" title="产品管理">产品管理</a></li>
-                    <li><a onclick="product_add('添加商品','product-add.html')" href="javascript:;" title="新增产品">新增产品</a>
-                    </li>
+                    <li><a href="{{route('category.new')}}" title="分类管理">分类管理</a></li>
                 </ul>
             </dd>
         </dl>

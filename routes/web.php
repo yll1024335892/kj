@@ -40,7 +40,10 @@ Route::get('/statistics/scatterplot','Admin\Statistics\StatisticsController@scat
 //交互相关:评论和意见反馈
 Route::get('/comment/list','Admin\Comment\CommentController@list')->name('comment.list');
 Route::get('/opinion/list','Admin\Comment\OpinionController@list')->name('opinion.list');
-
+//类别相关
+Route::get('/category/new','Admin\Category\NewCategoryController@index')->name('category.new');
+Route::get('/category/new/addview','Admin\Category\NewCategoryController@addView')->name('category.new.addview');
+Route::get('/category/new/{id}/edit','Admin\Category\NewCategoryController@edit')->name('category.new.edit');
 //前台相关
 //
 Route::get('/ayi/user','User\UserController@index')->name("ayi.user.index");
