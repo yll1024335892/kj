@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+      $ev=  app()->environment();
+        var_dump($ev);
         return view('home');
     }
 }

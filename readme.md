@@ -12,6 +12,12 @@ php artisan migrate --seed		去填充数据
 
 ## 扩展包
 composer require yansongda/pay	支付相关的扩展
+
+composer require monolog/monolog   日志系统
+
+spatie/laravel-permission		权限管理扩展
+
+mews/captcha	验证码
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -48,3 +48,13 @@ Route::get('/category/new/{id}/edit','Admin\Category\NewCategoryController@edit'
 //
 Route::get('/ayi/user','User\UserController@index')->name("ayi.user.index");
 
+
+
+Route::get('alipay', function() {
+    return app('alipay')->web([
+        'out_trade_no' => time(),
+        'total_amount' => '1',
+        'subject' => 'test subject - 测试',
+    ]);
+});
+
