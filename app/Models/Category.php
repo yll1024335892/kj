@@ -19,9 +19,8 @@ class Category extends Model
 
 
     private $rawList = array();                                              //原始的分类数据
-    private $formatList = array();                                           //格式化后的分类
-    private $error = "";                                                      //错误信息
-    private $icon = array('&nbsp;&nbsp;│', '&nbsp;&nbsp;├ ', '&nbsp;&nbsp;└ ');  //格式化的字符
+    private static $formatList = array();                                           //格式化后的分类
+    private $icon = array('--│', '--├ ', '--└ ');  //格式化的字符
     private $fields = array("id"=>'id',"pid"=>'pid',"name"=>'name',"fullname"=>'fullname');                                               //字段映射，分类id，上级分类pid,分类名称name
 
     /**
@@ -74,24 +73,18 @@ class Category extends Model
         return $childs;
     }
 
-    /**
-     * 递归格式化分类前的字符
-     * @param   int     $id    分类id
-     * @param   string  $space
-     */
-
 
 
     private function _searchList($id = 0, $space = "") {
         $childs = $this->getChild($id);
         //下级分类的数组
         //如果没下级分类，结束递归
+      static  $tempArr=array();
         if (!($n = count($childs))){
             return;
         }
         $m = 1;
         //循环所有的下级分类
-        $tempArr=array();
         for ($i = 0; $i < $n; $i++) {
             $pre = "";
             $pad = "";
@@ -102,8 +95,8 @@ class Category extends Model
                 $pad = $space ? $this->icon[0] : "";
             }
             $childs[$i][$this->fields['fullname']] = ($space ? $space . $pre : "") . $childs[$i][$this->fields['name']];
-            array_push($tempArr,$childs[$i]);
-            $this->_searchList($childs[$i][$this->fields['id']], $space . $pad . "&nbsp;&nbsp;"); //递归下一级分类
+            $tempArr[]=$childs[$i];
+            $this->_searchList($childs[$i][$this->fields['id']], $space . $pad . "--"); //递归下一级分类
             $m++;
         }
         $this->formatList=$tempArr;
@@ -124,31 +117,10 @@ class Category extends Model
 
     public function getList($condition = NULL, $id = 0, $orderby = NULL) {
         unset($this->rawList, $this->formatList);
-        $this->_findAllCat($condition, $orderby, $orderby);
+        $this->_findAllCat($condition, $orderby);
         $this->_searchList($id);
         return $this->formatList;
     }
-
-
-
-    /**
-     * 获取结构
-     * @param   array            $data         二维数组数据
-     * @param   int              $cid          起始分类
-     * @return  array           递归格式化分类数组
-     */
-
-
-
-//    public function getTree($data, $cid = 0) {
-//        unset($this->rawList, $this->formatList);
-//        $this->rawList = $data;
-//        $this->_searchList($cid);
-//        return $this->formatList;
-//    }
-
-
-
 
 
 

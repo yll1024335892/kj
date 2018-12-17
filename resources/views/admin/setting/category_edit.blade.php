@@ -12,7 +12,8 @@
 </head>
 <body>
 <article class="Hui-admin-page-container">
-    <form action="{{route('category.store')}}" method="post" class="form form-horizontal" id="form-category-add">
+    <form action="{{route('category.update',$categoryObj['id'])}}" method="post" class="form form-horizontal" id="form-category-add">
+        <input type="hidden" name="_method" value="PUT">
         @csrf
         <div class="HuiTab">
             <div class="tabCon" style="display: block;">
@@ -23,7 +24,7 @@
                                     <option value="0">顶级分类</option>
                                     @if(is_array($categoryList))
                                         @foreach($categoryList as $category)
-                                            <option @if($category['status']==0) disabled @endif value="{{$category['id']}}">{{$category['fullname']}}</option>
+                                            <option @if($category['id']==$categoryObj['pid']) selected @endif value="{{$category['id']}}">{{$category['fullname']}}</option>
                                         @endforeach
                                     @endif
 								</select>
@@ -33,7 +34,7 @@
                 <div class="row clearfix">
                     <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类名称：</label>
                     <div class="form-controls col-xs-8 col-sm-9">
-                        <input type="text" class="input-text" placeholder=""  name="name">
+                        <input type="text" class="input-text" value="{{$categoryObj['name']}}"  name="name">
                     </div>
                     <div class="col-3"> </div>
                 </div>
@@ -41,11 +42,11 @@
                     <label class="form-label col-xs-4 col-sm-3">显隐：</label>
                     <div class="form-controls col-xs-8 col-sm-9 skin-minimal">
                         <div class="radio-box">
-                            <input type="radio" value="1" checked  name="status">
+                            <input type="radio" value="1" @if($categoryObj['status']==1) checked @endif   name="status">
                             <label for="radio-1">显示</label>
                         </div>
                         <div class="radio-box">
-                            <input type="radio" value="0"  name="status">
+                            <input type="radio" value="0" @if($categoryObj['status']==0) checked @endif name="status">
                             <label for="radio-2">隐藏</label>
                         </div>
                     </div>

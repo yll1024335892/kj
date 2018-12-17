@@ -9,6 +9,9 @@
 php artisan key:generate	更新密钥数据
 
 php artisan migrate --seed		去填充数据
+
+## 扩展包
+composer require yansongda/pay	支付相关的扩展
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

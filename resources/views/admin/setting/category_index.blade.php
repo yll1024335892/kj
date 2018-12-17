@@ -48,15 +48,15 @@
                             <th width="100">操作</th>
                         </tr>
                         </thead>
-                        @if(count($categoryList))
+                        @if($categoryList)
                         <tbody>
                         @foreach($categoryList as $category)
                         <tr class="text-c">
                             <td><input type="checkbox" name="id[]" value="{{$category['id']}}"></td>
                             <td>{{$category['id']}}</td>
                             <td>{{$category['sort']}}</td>
-                            <td class="text-l">{{$category['name']}}</td>
-                            <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="article_category_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                            <td class="text-l"  @if($category['status']==0) style="color: #E8E9EC;"@endif>{{$category['fullname']}}</td>
+                            <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','{{route("category.edit",$category['id'])}}','','500')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="system_category_del(this,'{{route('category.destroy',$category['id'])}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -70,6 +70,24 @@
 @section("script")
     <script type="text/javascript">
         function system_category_add(title,url,w,h){
+            layer_show(title,url,w,h);
+        }
+        function system_category_del(obj,url){
+            layer.confirm('栏目删除须谨慎，确认要删除吗？',function(index){
+                $.post(url, {
+                    "_token": "{{ csrf_token() }}",
+                    "_method": "delete"
+                }, function(data) {
+                    if (data.status == 0) {
+                        layer.msg(data.msg, { icon: 6});
+                        location.href = "{{ url('category') }}";
+                    } else {
+                        layer.msg(data.msg, { icon: 5});
+                    }
+                });
+            });
+        }
+        function system_category_edit(title,url,w,h){
             layer_show(title,url,w,h);
         }
     </script>
