@@ -53,7 +53,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!$permissionList->isEmpty())@foreach($permissionList as $permission)
+                        @if(!$permissionList->isEmpty())
+                        @foreach($permissionList as $permission)
                         <tr class="text-c">
                             <td><input type="checkbox" value="1" name=""></td>
                             <td>{{$permission['id']}}</td>
@@ -62,9 +63,11 @@
                             <td><a title="编辑" href="javascript:;" onclick="admin_permission_edit('角色编辑','{{route('permission.edit',$permission->id)}}','','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                         </tr>
                         @endforeach
+                        {{ $permissionList->links() }}
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

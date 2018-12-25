@@ -12,7 +12,9 @@ class PermissionController extends Controller
     public function  index(){
         $menuMark="permission_index";//是否是当前menu选择
         $menuSelect="permission";
-        $permissionList=Permission::all();
+       // $permissionList=Permission::all();
+        $permissionList = Permission::paginate(1);
+
         return view("admin.permission.permission_show",compact("menuMark","menuSelect","permissionList"));
     }
 

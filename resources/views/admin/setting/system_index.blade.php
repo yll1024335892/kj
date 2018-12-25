@@ -23,7 +23,7 @@
             <div class="panel-body">
                 <form action="" method="post" class="form form-horizontal" id="form-system-base">
                     <div id="tab-system" class="HuiTab">
-                        <div class="tabBar cl"><span>基本设置</span><span>安全设置</span><span>邮件设置</span></div>
+                        <div class="tabBar cl"><span>基本设置</span><span>支付设置</span><span>邮件设置</span></div>
                         <div class="tabCon">
                             <div class="row clearfix">
                                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>网站名称：</label>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <label class="form-label col-xs-4 col-sm-2">统计代码：</label>
+                                <label class="form-label col-xs-4 col-sm-2">统计代码:</label>
                                 <div class="form-controls col-xs-8 col-sm-9">
                                     <textarea class="textarea"></textarea>
                                 </div>
@@ -64,15 +64,45 @@
                         </div>
                         <div class="tabCon">
                             <div class="row clearfix">
-                                <label class="form-label col-xs-4 col-sm-2">允许访问后台的IP列表：</label>
+                                <label class="form-label col-xs-4 col-sm-2">支付宝设置</label>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">appid</label>
+                                <div class="form-controls col-xs-8 col-sm-9">
+                                    <input type="text"  name="appid" placeholder="" value="" class="input-text">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">公钥:</label>
                                 <div class="form-controls col-xs-8 col-sm-9">
                                     <textarea class="textarea"></textarea>
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <label class="form-label col-xs-4 col-sm-2">后台登录失败最大次数：</label>
+                                <label class="form-label col-xs-4 col-sm-2">私钥:</label>
                                 <div class="form-controls col-xs-8 col-sm-9">
-                                    <input type="text" id="" value="5" class="input-text">
+                                    <textarea class="textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">微信支付设置</label>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">appid</label>
+                                <div class="form-controls col-xs-8 col-sm-9">
+                                    <input type="text"  name="appid" placeholder="" value="" class="input-text">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">公钥:</label>
+                                <div class="form-controls col-xs-8 col-sm-9">
+                                    <textarea class="textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <label class="form-label col-xs-4 col-sm-2">私钥:</label>
+                                <div class="form-controls col-xs-8 col-sm-9">
+                                    <textarea class="textarea"></textarea>
                                 </div>
                             </div>
                         </div>
