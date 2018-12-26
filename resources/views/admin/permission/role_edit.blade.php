@@ -12,7 +12,7 @@
 </head>
 <body>
 <article class="clearfix pd-20">
-    <form action="{{route('role.update',$role->id)}}" method="post" class="form form-horizontal" id="form-admin-role-add">
+    <form  class="form form-horizontal" id="form-admin-role-add">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row clearfix">
@@ -24,7 +24,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">备注信息：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text"  placeholder=""  name="descript">
+                <input type="text" class="input-text"  placeholder="" value="{{$role->descript}}"  name="descript">
             </div>
         </div>
 
@@ -50,10 +50,23 @@
         @endif
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <button type="submit" class="btn btn-success radius" id="admin-role-save"><i class="icon-ok"></i> 确定</button>
+                <button onclick="role_edit({{$role->id}});" class="btn btn-success radius" id="admin-role-save"><i class="icon-ok"></i> 确定</button>
             </div>
         </div>
     </form>
 </article>
+@include("layouts.admin._footer")
+<script type="text/javascript">
+    function role_edit(id)
+    {
+        $.post("{{ url('role') }}/" + id, $("form").serialize(), function(data) {
+            console.log(data.msg);
+            layer.msg(data.msg, { icon: 6});
+            layer.closeAll();
+           // layer.closeAll();
+           // layer_close();
+        });
+    }
+</script>
 </body>
 </html>

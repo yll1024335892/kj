@@ -10,6 +10,9 @@
 ?>
 @extends('layouts.admin.app')
 @section("title","阿翼管理系统")
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/pagination.css')}}" type="text/css"/>
+@endsection
 @section('nav-breadcrumb')
     首页
     <span class="c-gray en">/</span>
@@ -36,8 +39,8 @@
 								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 								<a href="javascript:;" onclick="admin_permission_add('添加权限节点','{{route('permission.create')}}','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a>
 							</span>
-                    <span class="f-r">共有数据：<strong>54</strong> 条</span>
                 </div>
+                @if(!$permissionList->isEmpty())
                 <div class="mt-20 clearfix">
                     <table class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
@@ -47,32 +50,32 @@
                         <tr class="text-c">
                             <th width="25"><input type="checkbox" name="" value=""></th>
                             <th width="40">ID</th>
-                            <th width="200">权限名称</th>
-                            <th>字段名</th>
+                            <th width="400">权限名称</th>
+                            <th>guard</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!$permissionList->isEmpty())
+
                         @foreach($permissionList as $permission)
                         <tr class="text-c">
                             <td><input type="checkbox" value="1" name=""></td>
                             <td>{{$permission['id']}}</td>
                             <td>{{$permission['name']}}</td>
-                            <td></td>
+                            <td>{{$permission['guard_name']}}</td>
                             <td><a title="编辑" href="javascript:;" onclick="admin_permission_edit('角色编辑','{{route('permission.edit',$permission->id)}}','','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                         </tr>
                         @endforeach
-                        {{ $permissionList->links() }}
-                            @endif
                         </tbody>
                     </table>
-
+                    {{ $permissionList->links() }}
                 </div>
+                @endif
             </div>
         </div>
     </article>
 @endsection
+@section('script')
 <script type="text/javascript">
     function admin_permission_add(title,url,w,h){
         layer_show(title,url,w,h);
@@ -87,3 +90,4 @@
         });
     }
 </script>
+    @endsection

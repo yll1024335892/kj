@@ -1,0 +1,4 @@
+.pagination{ margin-top: 20px;}
+.pagination li{ cursor: pointer; float: left; display: inline-block; width: 20px; height: 20px; border: 1px solid #E8E9EC; padding: 5px; margin: 0 10px; text-align: center;}
+.pagination li.active{ background: #429842; color: #fff;}
+.pagination li.disabled{cursor:not-allowed;}

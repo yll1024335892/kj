@@ -57,24 +57,22 @@ class RoleController extends Controller
             'name'=>'required|max:10|unique:roles,name,'.$id,
             'permissions' =>'required',
         ]);
-
         $input = $request->except(['permissions']);
         $permissions = $request['permissions'];
         $role->fill($input)->save();
         $p_all = Permission::all();
-
         foreach ($p_all as $p) {
             $role->revokePermissionTo($p);
         }
-
         foreach ($permissions as $permission) {
             $p = Permission::where('id', '=', $permission)->firstOrFail(); //Get corresponding form permission in db
             $role->givePermissionTo($p);
         }
-
-//        return redirect()->route('roles.index')
-//            ->with('flash_message',
-//                'Role'. $role->name.' updated!');
+        $data = [
+            'status' => 1,
+            'msg' => '删除成功'
+        ];
+        return $data;
     }
     public function edit($id){
         $role = Role::findOrFail($id);

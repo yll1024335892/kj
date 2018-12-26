@@ -13,7 +13,7 @@ class PermissionController extends Controller
         $menuMark="permission_index";//是否是当前menu选择
         $menuSelect="permission";
        // $permissionList=Permission::all();
-        $permissionList = Permission::paginate(1);
+        $permissionList = Permission::paginate(4);
 
         return view("admin.permission.permission_show",compact("menuMark","menuSelect","permissionList"));
     }
@@ -64,7 +64,8 @@ class PermissionController extends Controller
     }
     public function edit($id){
         $permission = Permission::find($id);
-        return view("admin.permission.permission_edit",compact("permission"));
+        $roles=  Role::get();
+        return view("admin.permission.permission_edit",compact("permission","roles"));
     }
 
 

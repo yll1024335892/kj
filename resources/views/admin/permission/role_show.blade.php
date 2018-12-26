@@ -38,7 +38,7 @@
                             <th width="25"><input type="checkbox" value="" name=""></th>
                             <th width="40">ID</th>
                             <th width="200">角色名</th>
-                            <th>用户列表</th>
+                            <th>权限列表</th>
                             <th width="300">描述</th>
                             <th width="70">操作</th>
                         </tr>
@@ -51,7 +51,7 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->permissions()->pluck('name')->implode(' ') }}</td>
-                                <td>具有添加、审核、发布、删除内容的权限</td>
+                                <td>{{ $role->descript }}</td>
                                 <td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','{{route('role.edit',$role->id)}}','','500')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'{{route('role.destroy',$role->id)}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                             </tr>
                         @endforeach
@@ -71,8 +71,6 @@
         layer_show(title,url,w,h);
     }
 
-
-
     function admin_role_del(obj,url){
         layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
             $.post(url, {
@@ -88,5 +86,7 @@
             });
         });
     }
+
+
 </script>
 

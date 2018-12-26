@@ -22,7 +22,7 @@
         </div>
         @if(!$roles->isEmpty())
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-3">管理者：</label>
+            <label class="form-label col-xs-4 col-sm-3">角色：</label>
             <div class="form-controls col-xs-8 col-sm-9">
                 @foreach ($roles as $role)
                     <label class="">

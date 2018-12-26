@@ -58,6 +58,11 @@ function layer_show(title,url,w,h){
 		content: url
 	});
 }
+function layer_close() {
+	
+	layer.closeAll();
+	location.reload();
+}
 
 /*时间*/
 function getHTMLDate(obj) {
