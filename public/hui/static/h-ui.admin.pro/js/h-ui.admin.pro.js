@@ -55,7 +55,8 @@ function layer_show(title,url,w,h){
 		maxmin: true,
 		shade:0.4,
 		title: title,
-		content: url
+		content: url,
+		end: function () {location.reload();}
 	});
 }
 function layer_close() {

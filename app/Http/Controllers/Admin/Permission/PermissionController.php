@@ -65,6 +65,7 @@ class PermissionController extends Controller
     public function edit($id){
         $permission = Permission::find($id);
         $roles=  Role::get();
+        //权限找到角色
         return view("admin.permission.permission_edit",compact("permission","roles"));
     }
 

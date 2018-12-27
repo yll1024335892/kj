@@ -40,8 +40,8 @@ class RoleController extends Controller
 
 
         foreach ($permissions as $permission) {
-            $p = Permission::where('id', '=', $permission)->firstOrFail();
-            $role = Role::where('name', '=', $name)->first();
+            $p = Permission::where('id', '=', $permission)->firstOrFail();//获取权限的数据
+            $role = Role::where('name', '=', $name)->first();//获取
             $role->givePermissionTo($p);
         }
 
@@ -70,7 +70,7 @@ class RoleController extends Controller
         }
         $data = [
             'status' => 1,
-            'msg' => '删除成功'
+            'msg' => '修改成功'
         ];
         return $data;
     }
