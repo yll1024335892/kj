@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Permission;
 
+use App\Models\RoleHasPermissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -50,21 +51,56 @@ class PermissionController extends Controller
 
     public function update(Request $request ,$id){
         $permission = Permission::findOrFail($id);
-
         $this->validate($request, [
             'name'=>'required|max:40',
         ]);
-
-        $input = $request->all();
+        $input = $request->except(['roles']);
         $permission->fill($input)->save();
+        $roles = $request['roles'];
+        $allValue=RoleHasPermissions::where(["permission_id"=>$id])->get()->toArray();//获取指定权限的角色权限数据
+        $postRoleHasP=array();
+        if (!empty($request['roles'])) {
+            foreach ($roles as $role) {
+                $postRoleHasP[]=['permission_id'=>$id,'role_id'=>$role];
+            }
+        }
+        $res=  $this->get_diff_array_by_filter($allValue,$postRoleHasP);//比较二维数组的差集
+        if (empty($res)){
+            if (!empty($request['roles'])) {
+                foreach ($roles as $role) {
+                    var_export($role);
+                    $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
+                    $permission = Permission::where('name', '=', $input['name'])->first();
+                    $r->givePermissionTo($permission);
+                }
+            }
+        }else{
+            foreach ($res as $value){
+                RoleHasPermissions::where(['permission_id'=>$id,'role_id'=>$value['role_id']])->delete();
+            }
+        }
 
-//        return redirect()->route('admin.permissions.index')
-//            ->with('flash_message',
-//                'Permission'. $permission->name.' updated!');
     }
     public function edit($id){
         $permission = Permission::find($id);
+        $roleHasP= RoleHasPermissions::where('permission_id','=',$id)->get()->toArray();
         $roles=  Role::get();
+        foreach ($roles as $key=>$value){
+           $isCheck=false;
+            foreach ($roleHasP as $key1=>$value1){
+                if ($value['id']==$value1['role_id']){
+                    $isCheck=true;
+                    break;
+                }else{
+                    $isCheck=false;
+                }
+            }
+            if ($isCheck){
+                $roles[$key]['isCheck']=1;
+            }else{
+                $roles[$key]['isCheck']=0;
+            }
+        }
         //权限找到角色
         return view("admin.permission.permission_edit",compact("permission","roles"));
     }
@@ -82,5 +118,16 @@ class PermissionController extends Controller
         return redirect()->route('permissions.index')
             ->with('flash_message',
                 'Permission deleted!');
+    }
+
+    private function get_diff_array_by_filter($arr1,$arr2)
+    {
+        try {
+            return array_filter($arr1, function ($v) use ($arr2) {
+                return !in_array($v, $arr2);
+            });
+        } catch (\Exception $exception) {
+            return $arr1;
+        }
     }
 }

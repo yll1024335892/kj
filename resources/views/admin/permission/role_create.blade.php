@@ -38,10 +38,20 @@
         </div>
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <button type="submit" class="btn btn-success radius" id="admin-role-save"><i class="icon-ok"></i> 确定</button>
+                <a href="javascript:" onclick="role_create();" class="btn btn-success radius" >确定</a>
             </div>
         </div>
     </form>
 </article>
+@include("layouts.admin._footer")
+<script type="text/javascript">
+    function role_create()
+    {
+        $.post("{{ route('role.store') }}", $("form").serialize(), function(data) {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        });
+    }
+</script>
 </body>
 </html>

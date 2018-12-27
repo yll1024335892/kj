@@ -12,7 +12,7 @@
 </head>
 <body>
 <article class="clearfix pd-20">
-    <form action="{{route('permission.update',$permission->id)}}" method="post" class="form form-horizontal" id="form-admin-role-add">
+    <form  class="form form-horizontal">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row clearfix">
@@ -27,22 +27,34 @@
                 <label class="form-label col-xs-4 col-sm-3">角色：</label>
                 <div class="form-controls col-xs-8 col-sm-9">
                     @foreach ($roles as $role)
+
                         <label class="">
-                            <input type="checkbox" value="{{$role['id']}}" name="roles[]">
+                            <input type="checkbox"
+                                   @if($role['isCheck']==1)
+                                        checked
+                                   @endif  value="{{$role['id']}}" name="roles[]">
                             {{$role['name']}}</label>
                     @endforeach
                 </div>
             </div>
-
-
         @endif
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <button type="submit" class="btn btn-success radius"><i class="icon-ok"></i> 确定</button>
+                <a type="submit" href="javascript:" onclick="permission_edit();" class="btn btn-success radius"> 确定</a>
             </div>
         </div>
     </form>
 </article>
+@include("layouts.admin._footer")
+<script type="text/javascript">
+    function permission_edit()
+    {
+        $.post("{{route('permission.update',$permission->id)}}", $("form").serialize(), function(data) {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        });
+    }
+</script>
 </body>
 </html>
 

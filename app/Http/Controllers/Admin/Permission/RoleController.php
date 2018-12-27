@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Permission;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\RoleHasPermissions;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -33,7 +34,7 @@ class RoleController extends Controller
         $name = $request['name'];
         $role = new Role();
         $role->name = $name;
-
+        $role->descript=$request->input('descript');
         $permissions = $request['permissions'];
 
         $role->save();
@@ -84,6 +85,7 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $res= $role->delete();
+        RoleHasPermissions::where('role_id', '=', $id)->delete();
         if ($res) {
             $data = [
                 'status' => 0,
