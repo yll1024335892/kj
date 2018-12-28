@@ -10,6 +10,9 @@
 ?>
 @extends('layouts.admin.app')
 @section("title","阿翼管理系统")
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/pagination.css')}}" type="text/css"/>
+@endsection
 @section('nav-breadcrumb')
     首页
     <span class="c-gray en">/</span>
@@ -23,11 +26,11 @@
             <div class="panel-body">
                 <div class="clearfix">
 						<span class="f-l">
-							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+							<a href="javascript:;" onclick="" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 							<a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加角色','{{route('role.create')}}','','500')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
 						</span>
-                    <span class="f-r">共有数据：<strong>54</strong> 条</span>
                 </div>
+                @if(!$roles->isEmpty())
                 <div class="mt-20 clearfix">
                     <table class="table table-border table-bordered table-hover table-bg">
                         <thead>
@@ -43,7 +46,6 @@
                             <th width="70">操作</th>
                         </tr>
                         </thead>
-                        @if(!$roles->isEmpty())
                         <tbody>
                         @foreach ($roles as $role)
                             <tr class="text-c">
@@ -56,9 +58,10 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        @endif
                     </table>
+                    {{ $roles->links() }}
                 </div>
+                @endif
             </div>
         </div>
     </article>

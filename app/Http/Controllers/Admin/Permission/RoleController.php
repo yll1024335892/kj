@@ -14,8 +14,7 @@ class RoleController extends Controller
     public function  index(){
         $menuMark="row_index";//是否是当前menu选择
         $menuSelect="permission";
-        $roles= Role::all();
-
+        $roles=Role::paginate(20);
         return view("admin.permission.role_show",compact("menuMark","menuSelect","roles"));
     }
 

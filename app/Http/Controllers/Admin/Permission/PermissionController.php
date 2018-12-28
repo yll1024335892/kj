@@ -10,13 +10,16 @@ use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
-    public function  index(){
+    public function  index(Request $request){
         $menuMark="permission_index";//是否是当前menu选择
         $menuSelect="permission";
-       // $permissionList=Permission::all();
-        $permissionList = Permission::paginate(4);
-
-        return view("admin.permission.permission_show",compact("menuMark","menuSelect","permissionList"));
+        $key=$request->input('search');
+        if (empty($key)){//判断是否是搜索
+            $permissionList = Permission::paginate(20);
+        }else{
+            $permissionList = Permission::where('name', 'like', '%'.$key.'%')->paginate(20);
+        }
+        return view("admin.permission.permission_show",compact("menuMark","menuSelect","permissionList","key"));
     }
 
     public function create(){

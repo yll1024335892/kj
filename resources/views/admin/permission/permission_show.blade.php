@@ -25,9 +25,9 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="text-c">
-                    <form class="Huiform" method="post" action="" target="_self">
-                        <input type="text" class="input-text" style="width:250px" placeholder="权限名称" id="" name="">
-                        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
+                    <form class="Huiform" method="get" action="{{route('permission.index')}}">
+                        <input type="text" class="input-text" style="width:250px" value="{{$key}}" placeholder="权限名称"  name="search">
+                        <button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
                     </form>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $permissionList->links() }}
+                    {{ $permissionList->appends(['search'=>$key])->links() }}
                 </div>
                 @endif
             </div>
