@@ -20,6 +20,8 @@ spatie/laravel-permission		权限管理扩展
 mews/captcha	验证码
 
 dingo/api   api的一个好的工具
+
+overtrue/easy-sms 短信发布组建
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
