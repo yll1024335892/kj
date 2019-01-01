@@ -24,6 +24,8 @@ dingo/api   api的一个好的工具
 overtrue/easy-sms 短信发布组建
 
 gregwar/captcha  验证码针对api
+
+socialiteproviders/weixin   微信授权登陆
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
